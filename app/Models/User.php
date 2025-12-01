@@ -24,4 +24,11 @@ public function isStudent()
     return $this->role === 'student';
 }
 
+protected $fillable = [
+    'name',
+    'email',
+    'password',
+    'role',
+    'avatar' 
+];
 }
