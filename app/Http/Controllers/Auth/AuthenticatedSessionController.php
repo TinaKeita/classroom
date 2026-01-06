@@ -50,7 +50,7 @@ class AuthenticatedSessionController extends Controller
         
         $request->session()->flush();
         
-        return redirect('/'); 
+        return redirect()->route('login')->with('status', 'You have been logged out.');
     }
 
 }
