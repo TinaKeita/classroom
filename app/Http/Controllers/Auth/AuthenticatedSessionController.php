@@ -25,11 +25,19 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
-
         $request->session()->regenerate();
 
-        return redirect()->intended(route('admin.index', absolute: false));
+        $user = auth()->user();
+        
+        // Role-based redirect
+        return match($user->role) {
+            'admin' => redirect()->route('admin.index'),
+            'teacher' => redirect()->route('teacher.classrooms.index'),
+            'student' => redirect()->route('student.index'),
+            default => redirect()->intended('/dashboard')
+        };
     }
+
 
     /**
      * Destroy an authenticated session.
@@ -37,11 +45,12 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
-
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
-
-        return redirect('/login');
+        
+        $request->session()->flush();
+        
+        return redirect('/'); 
     }
+
 }

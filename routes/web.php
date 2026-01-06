@@ -9,7 +9,8 @@ use App\Http\Controllers\Teacher\SubmissionController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+}); 
+
 
 // Admin routes - protected
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
