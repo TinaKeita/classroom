@@ -11,7 +11,8 @@ use App\Http\Controllers\Student\SubmissionController as StudentSubmissionContro
 
 Route::get('/', function () {
     return view('welcome');
-});
+}); 
+
 
 // Admin routes - protected
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
