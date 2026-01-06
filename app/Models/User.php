@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+
 class User extends Authenticatable
 {
     public function isAdmin()
@@ -23,6 +24,7 @@ public function isStudent()
 {
     return $this->role === 'student';
 }
+
 
 protected $fillable = [
     'name',
