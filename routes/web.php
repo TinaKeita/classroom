@@ -6,6 +6,8 @@ use App\Http\Middleware\RoleMiddleware;
 use App\Http\Controllers\Teacher\ClassroomController;
 use App\Http\Controllers\Teacher\AssignmentController;
 use App\Http\Controllers\Teacher\SubmissionController;
+use App\Http\Controllers\Student\ClassroomJoinController;
+use App\Http\Controllers\Student\SubmissionController as StudentSubmissionController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,6 +33,21 @@ Route::middleware(['auth', 'role:teacher'])->prefix('teacher')->name('teacher.')
     Route::get('/assignments/{assignment}/submissions', [SubmissionController::class, 'index'])->name('assignments.submissions.index');
     Route::put('/submissions/{submission}/grade', [SubmissionController::class, 'updateGrade'])->name('submissions.grade');
 });
+
+
+// Student routes
+Route::middleware(['auth', 'role:student'])
+    ->prefix('student')
+    ->name('student.')
+    ->group(function () {
+        // Join classroom by code
+        Route::get('/join', [ClassroomJoinController::class, 'showJoinForm'])->name('join.form');
+        Route::post('/join', [ClassroomJoinController::class, 'join'])->name('join');
+
+        // Submit assignment
+        Route::get('/assignments/{assignment}', [StudentSubmissionController::class, 'create'])->name('assignments.show');
+        Route::post('/assignments/{assignment}/submit', [StudentSubmissionController::class, 'store'])->name('assignments.submit');
+    });
 
 require __DIR__.'/auth.php';
 

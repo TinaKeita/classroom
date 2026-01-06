@@ -1,0 +1,16 @@
+/* Light default */
+body {
+    background: #ffffff;
+    color: #111827;
+}
+
+/* Dark tema, kad html ir .dark */
+html.dark body {
+    background: #111827;
+    color: #f9fafb;
+}
+
+/* Piemērs linkiem, kartiņām, utt. */
+html.dark a {
+    color: #93c5fd;
+}

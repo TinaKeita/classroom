@@ -24,7 +24,16 @@ public function isStudent()
 {
     return $this->role === 'student';
 }
+//priekš studentiem
+public function classrooms()
+{
+    return $this->belongsToMany(Classroom::class, 'classroom_student', 'student_id', 'classroom_id');
+}
 
+public function students()
+{
+    return $this->belongsToMany(User::class, 'classroom_student', 'classroom_id', 'student_id');
+}
 
 protected $fillable = [
     'name',

@@ -8,10 +8,15 @@
     <link rel="stylesheet" href="{{ asset('style.css') }}">
 </head>
 <body>
+
+ <button id="theme-toggle">Dark / Light</button>
+
     @auth
         <x-navigation></x-navigation>
     @endauth
     {{ $slot }}
+
+  <script src="{{ asset('theme.js') }}"></script>
 
 </body>
 </html>
