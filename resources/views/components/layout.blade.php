@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="{{ asset('style.css') }}">
 </head>
 <body>
-    {{-- @auth
+    @auth
         <x-navigation></x-navigation>
-    @endauth --}}
+    @endauth
     {{ $slot }}
 
 </body>
