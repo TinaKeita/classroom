@@ -40,7 +40,7 @@
                                        required>
                                 <p class="text-xs text-gray-500 mt-1">Ask your teacher for the 6-character code</p>
                             </div>
-                            <button type="submit" class="w-full inline-flex justify-center items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-sm text-white uppercase tracking-widest hover:bg-blue-700">
+                            <button type="submit" class="w-full inline-flex justify-center items-center px-4 py-2 bg-blue-600 border border-black rounded-md font-semibold text-sm text-black uppercase tracking-widest hover:bg-blue-700">
                                 Join Classroom
                             </button>
                         </form>
