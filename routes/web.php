@@ -10,7 +10,7 @@ use App\Http\Controllers\Student\ClassroomJoinController;
 use App\Http\Controllers\Student\SubmissionController as StudentSubmissionController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 }); 
 
 
