@@ -41,9 +41,13 @@ Route::middleware(['auth', 'role:student'])
     ->prefix('student')
     ->name('student.')
     ->group(function () {
+        // Student dashboard
+        Route::get('/', [ClassroomJoinController::class, 'index'])->name('index');
+        
         // Join classroom by code
         Route::get('/join', [ClassroomJoinController::class, 'showJoinForm'])->name('join.form');
         Route::post('/join', [ClassroomJoinController::class, 'join'])->name('join');
+        Route::get('/classroom/{join_code}', [ClassroomJoinController::class, 'join'])->name('classroom.join');
 
         // Submit assignment
         Route::get('/assignments/{assignment}', [StudentSubmissionController::class, 'create'])->name('assignments.show');
