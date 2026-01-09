@@ -20,27 +20,12 @@ class ClassroomJoinController extends Controller
 
     public function join($join_code = null, Request $request)
     {
-        if ($join_code) {
-            // Ja join_code ir URL parametrs
-            $classroom = Classroom::where('join_code', $join_code)->first();
-
-            if (! $classroom) {
-                return back()->withErrors(['join_code' => 'Classroom not found.']);
-            }
-        } else {
-            // Ja join_code ir POST parametrs
-            $request->validate([
-                'join_code' => ['required', 'string', 'size:6'],
-            ]);
-
-            $classroom = Classroom::where('join_code', $request->join_code)->first();
-
-            if (! $classroom) {
-                return back()->withErrors(['join_code' => 'Classroom not found.']);
-            }
+        if (!$join_code) {
+            $request->validate(['join_code' => 'required|string|size:6']);
+            $join_code = $request->join_code;
         }
 
-        // pierakstāmies pivot tabulā
+        $classroom = Classroom::where('join_code', $join_code)->firstOrFail();
         $request->user()->classrooms()->syncWithoutDetaching([$classroom->id]);
 
         return redirect()->route('student.assignments.show', $classroom->assignments()->first() ?? $classroom);

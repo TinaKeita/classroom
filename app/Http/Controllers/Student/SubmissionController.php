@@ -16,20 +16,17 @@ class SubmissionController extends Controller
 
     public function store(Request $request, Assignment $assignment)
     {
-        $request->validate([
-            'file'    => ['required', 'file', 'max:4096'],
-            'comment' => ['nullable', 'string'],
+        $validated = $request->validate([
+            'file' => 'required|file|max:4096',
+            'comment' => 'nullable|string',
         ]);
 
-        $path = $request->file('file')->store('submissions', 'public');
+        $validated['assignment_id'] = $assignment->id;
+        $validated['student_id'] = auth()->id();
+        $validated['file_path'] = $request->file('file')->store('submissions', 'public');
+        $validated['submitted_at'] = now();
 
-        Submission::create([
-            'assignment_id' => $assignment->id,
-            'student_id'    => $request->user()->id,
-            'file_path'     => $path,
-            'comment'       => $request->comment,
-        ]);
-
+        Submission::create($validated);
         return back()->with('success', 'Assignment submitted.');
     }
 }
