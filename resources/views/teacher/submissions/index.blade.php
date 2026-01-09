@@ -1,4 +1,4 @@
-<x-layout title="Submissions">
+<x-app-layout title="Submissions">
     <div class="max-w-7xl mx-auto px-4 py-8">
         <h1 class="text-2xl font-bold mb-2">{{ $assignment->title }}</h1>
         <p class="text-gray-600 mb-6">{{ Str::limit($assignment->description, 150) }}</p>
@@ -16,7 +16,7 @@
                             </div>
                             <div class="flex items-center justify-between mt-2">
                                 @if($submission->file_path)
-                                    <a href="{{ Storage::url($submission->file_path) }}" target="_blank" class="text-blue-600 hover:text-blue-800 text-sm">View File</a>
+                                    <a href="{{ route('teacher.submissions.file', $submission) }}" target="_blank" class="text-blue-600 hover:text-blue-800 text-sm">View File</a>
                                 @else
                                     <span class="text-gray-500 text-sm">No file</span>
                                 @endif
@@ -37,4 +37,4 @@
             <a href="javascript:history.back()" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700">Back</a>
         </div>
     </div>
-</x-layout>
+</x-app-layout>

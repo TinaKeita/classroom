@@ -24,6 +24,6 @@
     </form>
 
     <div class="mt-4">
-        <a href="{{ route('student.index') }}" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700">Back to Dashboard</a>
+        <a href="{{ route('student.index') }}" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700">Back to profile</a>
     </div>
 </x-layout>

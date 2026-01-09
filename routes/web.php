@@ -33,6 +33,7 @@ Route::middleware(['auth', 'role:teacher'])->prefix('teacher')->name('teacher.')
 
     Route::get('/assignments/{assignment}/submissions', [SubmissionController::class, 'index'])->name('assignments.submissions.index');
     Route::put('/submissions/{submission}/grade', [SubmissionController::class, 'updateGrade'])->name('submissions.grade');
+    Route::get('/submissions/{submission}/file', [SubmissionController::class, 'file'])->name('submissions.file');
 });
 
 

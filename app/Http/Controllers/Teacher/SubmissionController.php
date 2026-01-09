@@ -25,4 +25,16 @@ class SubmissionController extends Controller
         
         return back();
     }
+
+    public function file(Submission $submission)
+    {
+        $this->authorize('view', $submission->assignment->classroom);
+
+        $path = storage_path('app/public/' . $submission->file_path);
+        if (!file_exists($path)) {
+            abort(404);
+        }
+
+        return response()->file($path);
+    }
 }

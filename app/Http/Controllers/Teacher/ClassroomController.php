@@ -24,7 +24,7 @@ class ClassroomController extends Controller
     {
         $validated = $request->validate(['name' => 'required|string|max:255']);
         
-        auth()->user()->classrooms()->create([
+        auth()->user()->createdClassrooms()->create([
             'name' => $validated['name'],
             'join_code' => Str::random(6),
         ]);
