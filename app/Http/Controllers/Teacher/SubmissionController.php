@@ -11,28 +11,18 @@ class SubmissionController extends Controller
 {
     public function index(Assignment $assignment)
     {
-        // var papildus pārbaudīt, vai assignment->classroom->teacher_id === auth()->id()
-        $submissions = Submission::where('assignment_id', $assignment->id)
-            ->with('student') // attiecība Submission->student()
-            ->get();
-
+        $this->authorize('view', $assignment->classroom);
+        $submissions = $assignment->submissions()->with('student')->get();
         return view('teacher.submissions.index', compact('assignment', 'submissions'));
     }
 
     public function updateGrade(Request $request, Submission $submission)
     {
-        $request->validate([
-            'grade' => ['nullable', 'integer', 'min:1', 'max:10'],
-        ]);
-
-        // drošības pēc pārbaude – vai šis submission pieder teacher klasei
-        $teacherId = $submission->assignment->classroom->teacher_id ?? null;
-        abort_unless($teacherId === auth()->id(), 403);
-
-        $submission->update([
-            'grade' => $request->grade,
-        ]);
-
+        $this->authorize('view', $submission->assignment->classroom);
+        
+        $validated = $request->validate(['grade' => 'nullable|integer|min:0|max:10']);
+        $submission->update($validated);
+        
         return back();
     }
 }
