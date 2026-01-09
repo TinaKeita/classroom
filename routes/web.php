@@ -48,6 +48,7 @@ Route::middleware(['auth', 'role:student'])
         Route::get('/join', [ClassroomJoinController::class, 'showJoinForm'])->name('join.form');
         Route::post('/join', [ClassroomJoinController::class, 'join'])->name('join');
         Route::get('/classroom/{join_code}', [ClassroomJoinController::class, 'join'])->name('classroom.join');
+        Route::get('/classroom-view/{classroom}', [ClassroomJoinController::class, 'showClassroom'])->name('classroom.view');
 
         // Submit assignment
         Route::get('/assignments/{assignment}', [StudentSubmissionController::class, 'create'])->name('assignments.show');

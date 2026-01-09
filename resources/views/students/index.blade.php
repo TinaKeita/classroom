@@ -42,7 +42,7 @@
                                         <h3 class="font-semibold">{{ $classroom->name }}</h3>
                                         <p class="text-sm text-gray-600">{{ $classroom->assignments()->count() }} assignments</p>
                                     </div>
-                                    <a href="#" class="bg-gray-800 text-white px-3 py-1 rounded text-sm hover:bg-gray-700">View</a>
+                                    <a href="{{ route('student.classroom.view', $classroom) }}" class="bg-gray-800 text-white px-3 py-1 rounded text-sm hover:bg-gray-700">View</a>
                                 </div>
                             @endforeach
                         </div>

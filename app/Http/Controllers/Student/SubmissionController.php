@@ -24,7 +24,6 @@ class SubmissionController extends Controller
         $validated['assignment_id'] = $assignment->id;
         $validated['student_id'] = auth()->id();
         $validated['file_path'] = $request->file('file')->store('submissions', 'public');
-        $validated['submitted_at'] = now();
 
         Submission::create($validated);
         return back()->with('success', 'Assignment submitted.');
