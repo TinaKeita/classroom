@@ -6,11 +6,17 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            <!-- Info row -->
-            <div class="mb-6">
-                <p class="text-gray-600">
-                    Students: {{ $classroom->students()->count() }}
-                </p>
+            <!-- Students section -->
+            <div class="bg-white shadow sm:rounded-lg p-6 mb-6">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h2 class="text-lg font-semibold mb-1">Students</h2>
+                        <p class="text-gray-600">{{ $classroom->students()->count() }} student(s) in this classroom</p>
+                    </div>
+                    <a href="{{ route('teacher.classrooms.students', $classroom) }}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md font-semibold text-sm hover:bg-blue-700">
+                        View Students
+                    </a>
+                </div>
             </div>
 
             <!-- Join code card -->

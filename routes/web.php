@@ -27,6 +27,7 @@ Route::middleware(['auth', 'role:teacher'])->prefix('teacher')->name('teacher.')
     Route::get('/classrooms/create', [ClassroomController::class, 'create'])->name('classrooms.create');
     Route::post('/classrooms', [ClassroomController::class, 'store'])->name('classrooms.store');
     Route::get('/classrooms/{classroom}', [ClassroomController::class, 'show'])->name('classrooms.show');
+    Route::get('/classrooms/{classroom}/students', [ClassroomController::class, 'students'])->name('classrooms.students');
 
     Route::get('/classrooms/{classroom}/assignments/create', [AssignmentController::class, 'create'])->name('classrooms.assignments.create');
     Route::post('/classrooms/{classroom}/assignments', [AssignmentController::class, 'store'])->name('classrooms.assignments.store');

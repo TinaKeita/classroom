@@ -37,4 +37,11 @@ class ClassroomController extends Controller
         $this->authorize('view', $classroom);
         return view('teacher.classrooms_show', compact('classroom'));
     }
+
+    public function students(Classroom $classroom)
+    {
+        $this->authorize('view', $classroom);
+        $students = $classroom->students()->get();
+        return view('teacher.classrooms_students', compact('classroom', 'students'));
+    }
 }
