@@ -37,6 +37,6 @@ class ClassroomJoinController extends Controller
         $classroom = Classroom::where('join_code', $join_code)->firstOrFail();
         $request->user()->classrooms()->syncWithoutDetaching([$classroom->id]);
 
-        return redirect()->route('student.assignments.show', $classroom->assignments()->first() ?? $classroom);
+        return redirect()->route('student.classroom.view', $classroom);
     }
 }

@@ -18,6 +18,17 @@
                                 <h3 class="text-lg font-semibold mb-2 dark:text-white">{{ $assignment->title }}</h3>
                                 <p class="text-gray-600 dark:text-gray-300 mb-4">{{ Str::limit($assignment->description, 200) }}</p>
                                 
+                                @if($assignment->file_path)
+                                    <div class="bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded p-3 mb-4">
+                                        <p class="text-sm text-blue-800 dark:text-blue-300 mb-2 font-semibold">📎 Assignment File:</p>
+                                        <a href="{{ asset('storage/' . $assignment->file_path) }}" 
+                                           target="_blank"
+                                           class="text-blue-600 dark:text-blue-400 hover:underline text-sm break-all">
+                                            {{ basename($assignment->file_path) }}
+                                        </a>
+                                    </div>
+                                @endif
+                                
                                 @php $submission = $assignment->submissions->first(); @endphp
                                 
                                 @if($submission)

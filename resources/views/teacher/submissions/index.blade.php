@@ -14,6 +14,12 @@
                                 </div>
                                 <span class="text-xl font-bold">{{ $submission->grade ?? '-' }}/10</span>
                             </div>
+                            @if($submission->comment)
+                                <div class="mt-2 p-2 bg-gray-50 border-l-4 border-blue-500 rounded">
+                                    <p class="text-xs font-semibold text-gray-700 mb-1">Student Comment:</p>
+                                    <p class="text-sm text-gray-600">{{ $submission->comment }}</p>
+                                </div>
+                            @endif
                             <div class="flex items-center justify-between mt-2">
                                 @if($submission->file_path)
                                     <a href="{{ route('teacher.submissions.file', $submission) }}" target="_blank" class="text-blue-600 hover:text-blue-800 text-sm">View File</a>
