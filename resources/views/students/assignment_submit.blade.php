@@ -14,17 +14,58 @@
                 @if($assignment->file_path)
                     <div class="bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded-lg p-4 mb-6">
                         <p class="text-sm text-blue-800 dark:text-blue-300 mb-3 font-semibold">📎 Assignment File</p>
-                        <a href="{{ asset('storage/' . $assignment->file_path) }}" 
-                           target="_blank"
-                           class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 text-sm font-medium">
-                            Download File
-                        </a>
+                        <div class="flex gap-2">
+                            <a href="{{ asset('storage/' . $assignment->file_path) }}" 
+                               target="_blank"
+                               class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm font-medium">
+                                👁️ View File
+                            </a>
+                            <a href="{{ asset('storage/' . $assignment->file_path) }}" 
+                               download
+                               class="inline-flex items-center px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 text-sm font-medium">
+                                ⬇️ Download
+                            </a>
+                        </div>
                     </div>
                 @endif
 
                 @if (session('success'))
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+                        <p class="text-green-800 font-semibold">✓ {{ session('success') }}</p>
+                    </div>
+                @endif
+
+                <!-- Student's Submission Status & Teacher Feedback -->
+                @php $submission = $assignment->submissions->where('student_id', auth()->id())->first(); @endphp
+                
+                @if($submission)
                     <div class="bg-green-50 dark:bg-green-900 border border-green-200 dark:border-green-700 rounded-lg p-4 mb-6">
-                        <p class="text-green-800 dark:text-green-300 font-semibold">✓ {{ session('success') }}</p>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-xl">✓</span>
+                            <p class="text-green-800 dark:text-green-300 font-semibold">You have submitted this assignment</p>
+                        </div>
+                        <p class="text-sm text-green-700 dark:text-green-300 mb-2">Submitted on: <strong>{{ $submission->submitted_at->format('M d, Y H:i') }}</strong></p>
+                        
+                        @if($submission->grade !== null)
+                            <div class="mt-3 p-3 bg-yellow-50 dark:bg-yellow-900 rounded">
+                                <p class="text-sm text-yellow-800 dark:text-yellow-300">
+                                    Grade: <strong class="text-lg">{{ $submission->grade }}/10</strong>
+                                </p>
+                            </div>
+                        @endif
+
+                        @if($submission->teacher_comment)
+                            <div class="mt-3 p-3 bg-purple-50 dark:bg-purple-900 rounded border-l-4 border-purple-500">
+                                <p class="text-xs font-semibold text-purple-700 dark:text-purple-300 mb-2">Teacher's Feedback:</p>
+                                <p class="text-sm text-purple-600 dark:text-purple-300">{{ $submission->teacher_comment }}</p>
+                            </div>
+                        @else
+                            @if($submission->grade === null)
+                                <div class="mt-3 p-3 bg-yellow-50 dark:bg-yellow-900 rounded">
+                                    <p class="text-sm text-yellow-800 dark:text-yellow-300">⏳ Waiting for teacher feedback...</p>
+                                </div>
+                            @endif
+                        @endif
                     </div>
                 @endif
 

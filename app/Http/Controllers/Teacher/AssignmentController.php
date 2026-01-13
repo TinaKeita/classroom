@@ -31,4 +31,27 @@ class AssignmentController extends Controller
         Assignment::create($validated);
         return redirect()->route('teacher.classrooms.show', $classroom);
     }
+
+    public function file(Assignment $assignment)
+    {
+        // Students can view assignment files if enrolled in classroom
+        // Teachers can always view their own assignments
+        $user = auth()->user();
+        
+        if ($user->role === 'teacher') {
+            $this->authorize('view', $assignment->classroom);
+        } else {
+            // Check if student is enrolled in the classroom
+            if (!$assignment->classroom->students->contains($user)) {
+                abort(403, 'You are not enrolled in this classroom.');
+            }
+        }
+
+        $path = storage_path('app/public/' . $assignment->file_path);
+        if (!file_exists($path)) {
+            abort(404, 'File not found.');
+        }
+
+        return response()->file($path);
+    }
 }

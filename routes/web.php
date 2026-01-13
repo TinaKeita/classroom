@@ -31,6 +31,7 @@ Route::middleware(['auth', 'role:teacher'])->prefix('teacher')->name('teacher.')
 
     Route::get('/classrooms/{classroom}/assignments/create', [AssignmentController::class, 'create'])->name('classrooms.assignments.create');
     Route::post('/classrooms/{classroom}/assignments', [AssignmentController::class, 'store'])->name('classrooms.assignments.store');
+    Route::get('/assignments/{assignment}/file', [AssignmentController::class, 'file'])->name('assignments.file');
 
     Route::get('/assignments/{assignment}/submissions', [SubmissionController::class, 'index'])->name('assignments.submissions.index');
     Route::put('/submissions/{submission}/grade', [SubmissionController::class, 'updateGrade'])->name('submissions.grade');
@@ -55,6 +56,7 @@ Route::middleware(['auth', 'role:student'])
         // Submit assignment
         Route::get('/assignments/{assignment}', [StudentSubmissionController::class, 'create'])->name('assignments.show');
         Route::post('/assignments/{assignment}/submit', [StudentSubmissionController::class, 'store'])->name('assignments.submit');
+        Route::get('/assignments/{assignment}/file', [App\Http\Controllers\Teacher\AssignmentController::class, 'file'])->name('assignments.file');
     });
 
 require __DIR__.'/auth.php';
