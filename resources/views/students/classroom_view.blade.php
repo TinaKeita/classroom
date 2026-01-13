@@ -32,15 +32,15 @@
                                 @php $submission = $assignment->submissions->first(); @endphp
                                 
                                 @if($submission)
-                                    <div class="bg-green-50 border border-green-200 rounded p-3 mb-3">
-                                        <p class="text-green-800 font-semibold">✓ Submitted</p>
-                                        <p class="text-sm text-green-700">On: {{ $submission->created_at->format('M d, Y H:i') }}</p>
+                                    <div class="bg-green-50 dark:bg-green-900 border border-green-200 dark:border-green-700 rounded p-3 mb-3">
+                                        <p class="text-green-800 dark:text-green-300 font-semibold">✓ Submitted</p>
+                                        <p class="text-sm text-green-700 dark:text-green-300">On: {{ $submission->created_at->format('M d, Y H:i') }}</p>
                                         @if($submission->grade)
-                                            <p class="text-sm text-green-700">Grade: <span class="font-bold">{{ $submission->grade }}/10</span></p>
+                                            <p class="text-sm text-green-700 dark:text-green-300">Grade: <span class="font-bold">{{ $submission->grade }}/10</span></p>
                                         @endif
                                     </div>
                                 @else
-                                    <a href="{{ route('student.assignments.show', $assignment) }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 inline-block">Submit Assignment</a>
+                                    <a href="{{ route('student.assignments.show', $assignment) }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 inline-block">Submit Assignment</a>
                                 @endif
                             </div>
                         @endforeach
