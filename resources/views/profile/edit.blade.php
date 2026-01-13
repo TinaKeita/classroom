@@ -13,7 +13,7 @@
                     
                     @if(auth()->user()->avatar)
                         <div class="mb-4">
-                            <img src="{{ Storage::url(auth()->user()->avatar) }}" alt="Profile" class="w-32 h-32 rounded-full object-cover">
+                            <img src="{{ '/' . auth()->user()->avatar }}" alt="Profile" class="w-32 h-32 rounded-full object-cover">
                         </div>
                     @else
                         <div class="mb-4 w-32 h-32 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">

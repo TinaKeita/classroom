@@ -8,7 +8,7 @@
             <div class="bg-white dark:bg-gray-800 shadow rounded p-6">
                 <div class="flex justify-between items-center mb-6">
                     <h1 class="text-2xl font-bold dark:text-white">{{ $classroom->name }}</h1>
-                    <a href="{{ route('student.index') }}" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700">Back to Classrooms</a>
+                    <a href="{{ route('student.index') }}" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600">Back to Classrooms</a>
                 </div>
 
                 @if($assignments->count())
@@ -46,7 +46,7 @@
                         @endforeach
                     </div>
                 @else
-                    <p class="text-gray-600 text-center py-8">No assignments in this classroom.</p>
+                    <p class="text-gray-600 dark:text-gray-300 text-center py-8">No assignments in this classroom.</p>
                 @endif
             </div>
         </div>

@@ -47,14 +47,16 @@ class ProfileController extends Controller
 
         $user = $request->user();
 
-        // Izdzēst veco avatāru
-        if ($user->avatar && Storage::disk('public')->exists($user->avatar)) {
-            Storage::disk('public')->delete($user->avatar);
+        // Delete old avatar
+        if ($user->avatar && file_exists(public_path($user->avatar))) {
+            unlink(public_path($user->avatar));
         }
 
-        // Augšupielādēt jauno avatāru
-        $path = $request->file('avatar')->store('avatars', 'public');
-        $user->update(['avatar' => $path]);
+        // Upload new avatar
+        $file = $request->file('avatar');
+        $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('avatars'), $filename);
+        $user->update(['avatar' => 'avatars/' . $filename]);
 
         return redirect()->route('profile.edit')->with('status', 'avatar-updated');
     }
