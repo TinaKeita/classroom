@@ -16,6 +16,7 @@ class Submission extends Model
         'comment',
         'grade',
         'submitted_at',
+        'teacher_comment',
     ];
 
     protected $casts = [

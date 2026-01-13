@@ -1,16 +1,43 @@
 /* Light default */
 body {
+    padding: 25px;
     background: #ffffff;
     color: #111827;
+    font-size: 25px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Dark tema, kad html ir .dark */
-html.dark body {
+/* Dark mode */
+body.dark-mode {
     background: #111827;
     color: #f9fafb;
 }
 
-/* Piemērs linkiem, kartiņām, utt. */
-html.dark a {
+body.dark-mode a {
     color: #93c5fd;
+}
+
+/* Theme toggle button */
+#theme-toggle {
+    padding: 8px;
+    border-radius: 6px;
+    background-color: #e5e7eb;
+    color: #111827;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#theme-toggle:hover {
+    background-color: #d1d5db;
+}
+
+body.dark-mode #theme-toggle {
+    background-color: #374151;
+    color: #f9fafb;
+}
+
+body.dark-mode #theme-toggle:hover {
+    background-color: #4b5563;
 }

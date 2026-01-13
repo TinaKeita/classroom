@@ -20,10 +20,14 @@ class SubmissionController extends Controller
     {
         $this->authorize('view', $submission->assignment->classroom);
         
-        $validated = $request->validate(['grade' => 'nullable|integer|min:0|max:10']);
+        $validated = $request->validate([
+            'grade' => 'nullable|integer|min:0|max:10',
+            'teacher_comment' => 'nullable|string',
+        ]);
+        
         $submission->update($validated);
         
-        return back();
+        return back()->with('success', 'Grade and feedback saved!');
     }
 
     public function file(Submission $submission)

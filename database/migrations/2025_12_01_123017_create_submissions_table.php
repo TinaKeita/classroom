@@ -17,7 +17,10 @@ return new class extends Migration
                   ->constrained('users')
                   ->onDelete('cascade');
             $table->string('file_path');                 // file_path
-            $table->text('comment')->nullable();         // comment
+            $table->text('comment')->nullable();         // comment (student comment)
+            $table->text('teacher_comment')->nullable(); // teacher_comment (teacher feedback)
+            $table->timestamp('submitted_at')->nullable(); // submitted_at
+            $table->integer('grade')->nullable();         // grade
             $table->timestamps();
         });
     }

@@ -15,9 +15,18 @@ class ClassroomJoinController extends Controller
 
     public function showClassroom(Classroom $classroom)
     {
-        $assignments = $classroom->assignments()->with(['submissions' => function($q) {
-            $q->where('student_id', auth()->id());
-        }])->get();
+        // Check if student is in this classroom
+        if (!auth()->user()->classrooms->contains($classroom)) {
+            abort(403, 'You are not enrolled in this classroom');
+        }
+
+        // Get all assignments for this classroom with the current student's submissions
+        $assignments = $classroom->assignments()
+            ->with(['submissions' => function($query) {
+                $query->where('student_id', auth()->id());
+            }])
+            ->orderByDesc('created_at')
+            ->get();
         
         return view('students.classroom_view', compact('classroom', 'assignments'));
     }
